@@ -20,12 +20,6 @@ public class ThanaService {
 	}
 
 	@Transactional
-	public void insert() {
-		Thana model = new Thana("Khilgaon");
-		thanaRepository.insert(model);
-	}
-
-	@Transactional
 	public List<Thana> getAll() {
 		return thanaRepository.retreiveAll();
 	}

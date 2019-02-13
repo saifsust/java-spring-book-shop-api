@@ -15,7 +15,7 @@ public class Division {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "divion_id")
+	@Column(name = "division_id")
 	private int divisionId;
 	@Column(name = "division_name")
 	private String divisionnName;

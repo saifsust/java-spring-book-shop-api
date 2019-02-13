@@ -1,6 +1,7 @@
 package org.woadec.migrations;
 
 public interface Migrate {
+	public static final String DATABASE = "WOADEC";
 	public static final String SQL_INIT = "CREATE TABLE IF NOT EXISTS ";
 	public static final String REGISTER_CLIENT = "register_clients";
 	public static final String THANA = "thanas";

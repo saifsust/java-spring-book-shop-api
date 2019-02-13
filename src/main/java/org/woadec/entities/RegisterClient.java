@@ -23,6 +23,8 @@ public class RegisterClient {
 	private String lastName;
 	@Column(name = "email")
 	private String email;
+	@Column(name = "client_password")
+	private String clientPassword;
 	@Column(name = "image_link")
 	private String imageLink;
 	@Column(name = "phone_number")
@@ -42,14 +44,13 @@ public class RegisterClient {
 		super();
 	}
 
-
-
-	public RegisterClient(String firstName, String lastName, String email, String imageLink, String phoneNumber,
-			int zeladId, int devisionId, int thanaId, String location, int postOfficeCode) {
+	public RegisterClient(String firstName, String lastName, String email, String clientPassword, String imageLink,
+			String phoneNumber, int zeladId, int devisionId, int thanaId, String location, int postOfficeCode) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.clientPassword = clientPassword;
 		this.imageLink = imageLink;
 		this.phoneNumber = phoneNumber;
 		this.zeladId = zeladId;
@@ -145,24 +146,28 @@ public class RegisterClient {
 		return imageLink;
 	}
 
-
-
 	public void setImageLink(String imageLink) {
 		this.imageLink = imageLink;
 	}
+	
+	
 
+	public String getClientPassword() {
+		return clientPassword;
+	}
 
+	public void setClientPassword(String clientPassword) {
+		this.clientPassword = clientPassword;
+	}
 
 	@Override
 	public String toString() {
 		return "RegisterClient [registerClientId=" + registerClientId + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", email=" + email + ", imageLink=" + imageLink + ", phoneNumber=" + phoneNumber
-				+ ", zeladId=" + zeladId + ", devisionId=" + devisionId + ", thanaId=" + thanaId + ", location="
-				+ location + ", postOfficeCode=" + postOfficeCode + "]";
+				+ lastName + ", email=" + email + ", clientPassword=" + clientPassword + ", imageLink=" + imageLink
+				+ ", phoneNumber=" + phoneNumber + ", zeladId=" + zeladId + ", devisionId=" + devisionId + ", thanaId="
+				+ thanaId + ", location=" + location + ", postOfficeCode=" + postOfficeCode + "]";
 	}
 
-
-
-
+	
 
 }

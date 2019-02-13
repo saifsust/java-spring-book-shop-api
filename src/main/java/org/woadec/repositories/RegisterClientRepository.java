@@ -5,7 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 
+import org.hibernate.dialect.pagination.SQL2008StandardLimitHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -22,10 +24,19 @@ public class RegisterClientRepository implements QueryMethods<RegisterClient> {
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	public void install() {
+		try {
+
+			Migrations.getInstance().buildEntities(entityManager);
+			log.info("DATABASE INSTALL SUCCESSFULLY");
+		} catch (Exception ex) {
+			log.error("database does not installed " + ex.getMessage());
+		}
+	}
+
 	@Override
 	public void insert(RegisterClient model) {
 		try {
-			// Migrations.getInstance().buildEntities(entityManager);
 			entityManager.persist(model);
 			log.info("RegisterClient insert Successfully (insert @param model ) : " + model);
 
@@ -68,4 +79,14 @@ public class RegisterClientRepository implements QueryMethods<RegisterClient> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Transactional
+	public RegisterClient findByEmail(String email) {
+		String SQL = "SELECT * FROM " + Migrations.REGISTER_CLIENT + " WHERE email ='" + email + "'";
+		Query query = entityManager.createNativeQuery(SQL, RegisterClient.class);
+		log.info("findByEmail : " + query.getSingleResult());
+		return (RegisterClient) query.getSingleResult();
+
+	}
+
 }

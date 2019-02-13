@@ -2,14 +2,18 @@ package org.woadec.migrations;
 
 import javax.persistence.EntityManager;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Migrations implements Migrate {
 
+	private static final Logger log = (Logger) LoggerFactory.getLogger(Migrations.class);
 	private static Migrations instance;
 
 	private Migrations() {
 	}
 
-	public void buildEntities(EntityManager entityManager) {
+	public String buildEntities(EntityManager entityManager) {
 
 		try {
 			entityManager.createNativeQuery(create_database()).executeUpdate();
@@ -21,9 +25,14 @@ public class Migrations implements Migrate {
 			entityManager.createNativeQuery(create_register_client()).executeUpdate();
 			entityManager.createNativeQuery(create_book()).executeUpdate();
 			entityManager.createNativeQuery(create_borrower()).executeUpdate();
+
+			log.info("database installed successfully '.' ");
+
 		} catch (Exception ex) {
-			System.out.println(ex.getMessage());
+			log.error("database does not installed ! " + ex.getMessage());
 		}
+
+		return null;
 	}
 
 	public static Migrations getInstance() {
@@ -43,6 +52,7 @@ public class Migrations implements Migrate {
 		SQL += "first_name varchar(50),";
 		SQL += "last_name varchar(50),";
 		SQL += "email varchar(100),";
+		SQL += "client_password text(10000),";
 		SQL += "phone_number varchar(45),";
 		SQL += "image_link text,";
 		SQL += "zela_id int(11),";

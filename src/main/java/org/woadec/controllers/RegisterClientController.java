@@ -31,25 +31,26 @@ public class RegisterClientController {
 	@Autowired
 	private RegisterClientService registerClientService;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/install", method = RequestMethod.GET)
 	@ResponseBody
-	public RegisterClient index(HttpServletRequest request, HttpServletResponse response) {
+	public String index(HttpServletRequest request, HttpServletResponse response) {
 
-		logger.info("HomeController Logger INFO : index method is called !");
+		try {
+			registerClientService.install();
+			logger.info("database installed successfully");
+		} catch (Exception ex) {
+			// TODO: handle exception
+			logger.error("database does not installed ! " + ex.getMessage());
+		}
 
-		System.out.println("Hello Controller");
-
-		System.out.println();
-
-		return registerClientService.insertData();
+		return "install successfully";
 
 	}
 
 	@RequestMapping(value = RegisterClientURLS.GET_REGISTER_CLIENTS, method = RequestMethod.GET)
 	@ResponseBody
 	public List<RegisterClient> retreiveAll(HttpServletRequest request, HttpServletResponse reponse) {
-		System.out.println(request.getRequestURL());
-
+		logger.info("retrieveall method is called ! " + request.getRequestURI());
 		return registerClientService.all();
 	}
 
@@ -60,5 +61,5 @@ public class RegisterClientController {
 		registerClientService.insert(client);
 		return client;
 	}
-
+	
 }

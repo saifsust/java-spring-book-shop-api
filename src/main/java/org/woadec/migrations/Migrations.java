@@ -125,8 +125,8 @@ public class Migrations implements Migrate {
 		String SQL = SQL_INIT + BORROWER;
 		SQL += "(";
 		SQL += "borrower_id " + PRIMARY_KEY;
-		SQL += "register_client_id int(11),";
-		SQL += "book_id int(11),";
+		SQL += "fk_register_client_id int(11),";
+		SQL += "fk_book_id int(11),";
 		SQL += "receive_date date,";
 		SQL += "return_date date";
 		SQL += ")";

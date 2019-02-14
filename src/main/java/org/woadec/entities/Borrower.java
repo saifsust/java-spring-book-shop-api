@@ -2,40 +2,21 @@ package org.woadec.entities;
 
 import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.woadec.migrations.Migrate;
-
-@Entity
-@Table(name = Migrate.BORROWER)
 public class Borrower {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "borrower_id")
 	private int borrowerId;
-	@Column(name = "register_client_id")
-	private int registerClientId;
-	@Column(name = "book_id")
-	private int bookId;
-	@Column(name = "receive_date")
+	private RegisterClient registerClient;
+	private Book book;
 	private Date receiveDate;
-	@Column(name = "return_date")
 	private Date returnDate;
 
 	public Borrower() {
 		super();
 	}
 
-	public Borrower(int registerClientId, int bookId, Date receiveDate, Date returnDate) {
+	public Borrower(RegisterClient registerClient, Book book, Date receiveDate, Date returnDate) {
 		super();
-		this.registerClientId = registerClientId;
-		this.bookId = bookId;
+		this.registerClient = registerClient;
+		this.book = book;
 		this.receiveDate = receiveDate;
 		this.returnDate = returnDate;
 	}
@@ -48,20 +29,20 @@ public class Borrower {
 		this.borrowerId = borrowerId;
 	}
 
-	public int getRegisterClientId() {
-		return registerClientId;
+	public RegisterClient getRegisterClient() {
+		return registerClient;
 	}
 
-	public void setRegisterClientId(int registerClientId) {
-		this.registerClientId = registerClientId;
+	public void setRegisterClient(RegisterClient registerClient) {
+		this.registerClient = registerClient;
 	}
 
-	public int getBookId() {
-		return bookId;
+	public Book getBook() {
+		return book;
 	}
 
-	public void setBookId(int bookId) {
-		this.bookId = bookId;
+	public void setBook(Book book) {
+		this.book = book;
 	}
 
 	public Date getReceiveDate() {
@@ -82,7 +63,7 @@ public class Borrower {
 
 	@Override
 	public String toString() {
-		return "Borrower [borrowerId=" + borrowerId + ", registerClientId=" + registerClientId + ", bookId=" + bookId
+		return "Borrower [borrowerId=" + borrowerId + ", registerClient=" + registerClient + ", book=" + book
 				+ ", receiveDate=" + receiveDate + ", returnDate=" + returnDate + "]";
 	}
 

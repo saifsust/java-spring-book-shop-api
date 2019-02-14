@@ -1,15 +1,16 @@
 package org.woadec.repositories;
 
-import java.awt.print.Book;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.woadec.entities.Book;
 import org.woadec.migrations.Migrate;
 
 @Repository
@@ -21,6 +22,7 @@ public class BookRepository implements QueryMethods<Book> {
 	private EntityManager em;
 
 	private String SQL;
+	private Query query;
 
 	@Override
 	public void insert(Book model) {
@@ -67,6 +69,19 @@ public class BookRepository implements QueryMethods<Book> {
 	@Override
 	public Book findById(int id) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Transactional
+	public List<Book> findByName(String bookName) throws Exception {
+		SQL = "SELECT * FROM " + Migrate.BOOK + " WHERE book_name = '" + bookName + "'";
+		query = em.createNativeQuery(SQL, Book.class);
+		List<Book> books = query.getResultList();
+		log.info("fetched books successfully : " + books);
+		return books;
+	}
+
+	private String process() {
 		return null;
 	}
 

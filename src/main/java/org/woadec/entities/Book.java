@@ -20,8 +20,8 @@ public class Book {
 	private String bookName;
 	@Column(name = "writers")
 	private String writers;
-	@Column(name = "publishers")
-	private String publishers;
+	@Column(name = "publisher_id")
+	private int publisher_id;
 	@Column(name = "total_copies")
 	private int totalCopies;
 	@Column(name = "taken_copies")
@@ -33,12 +33,12 @@ public class Book {
 		super();
 	}
 
-	public Book(String bookName, String writers, String publishers, int totalCopies, int takenCopies,
+	public Book(String bookName, String writers, int publisher_id, int totalCopies, int takenCopies,
 			String bookImageLink) {
 		super();
 		this.bookName = bookName;
 		this.writers = writers;
-		this.publishers = publishers;
+		this.publisher_id = publisher_id;
 		this.totalCopies = totalCopies;
 		this.takenCopies = takenCopies;
 		this.bookImageLink = bookImageLink;
@@ -68,12 +68,12 @@ public class Book {
 		this.writers = writers;
 	}
 
-	public String getPublishers() {
-		return publishers;
+	public int getPublisher_id() {
+		return publisher_id;
 	}
 
-	public void setPublishers(String publishers) {
-		this.publishers = publishers;
+	public void setPublisher_id(int publisher_id) {
+		this.publisher_id = publisher_id;
 	}
 
 	public int getTotalCopies() {
@@ -102,8 +102,8 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [bookId=" + bookId + ", bookName=" + bookName + ", writers=" + writers + ", publishers="
-				+ publishers + ", totalCopies=" + totalCopies + ", takenCopies=" + takenCopies + ", bookImageLink="
+		return "Book [bookId=" + bookId + ", bookName=" + bookName + ", writers=" + writers + ", publisher_id="
+				+ publisher_id + ", totalCopies=" + totalCopies + ", takenCopies=" + takenCopies + ", bookImageLink="
 				+ bookImageLink + "]";
 	}
 

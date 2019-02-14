@@ -25,6 +25,7 @@ public class Migrations implements Migrate {
 			entityManager.createNativeQuery(create_register_client()).executeUpdate();
 			entityManager.createNativeQuery(create_book()).executeUpdate();
 			entityManager.createNativeQuery(create_borrower()).executeUpdate();
+			entityManager.createNativeQuery(create_publisher()).executeUpdate();
 
 			log.info("database installed successfully '.' ");
 
@@ -112,7 +113,7 @@ public class Migrations implements Migrate {
 		SQL += "book_id " + PRIMARY_KEY;
 		SQL += "book_name varchar(300),";
 		SQL += "writers varchar(400),";
-		SQL += "publisher varchar(200),";
+		SQL += "publisher_id int(11),";
 		SQL += "total_copies int,";
 		SQL += "taken_copies int,";
 		SQL += "book_image_link text";
@@ -128,6 +129,15 @@ public class Migrations implements Migrate {
 		SQL += "book_id int(11),";
 		SQL += "receive_date date,";
 		SQL += "return_date date";
+		SQL += ")";
+		return SQL;
+	}
+
+	private final String create_publisher() {
+		String SQL = SQL_INIT + PUBLISHER;
+		SQL += "(";
+		SQL += "publisher_id " + PRIMARY_KEY;
+		SQL += "publisher_name varchar(500)";
 		SQL += ")";
 		return SQL;
 	}
